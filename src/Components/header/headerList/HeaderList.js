@@ -5,7 +5,7 @@ const HeaderList = () => {
   return (
     <ul>
       {data.header.map((headerItem) => (
-        <li>{headerItem}</li>
+        <li key={headerItem}>{headerItem}</li>
       ))}
     </ul>
   );
