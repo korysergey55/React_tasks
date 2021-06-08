@@ -1,0 +1,6 @@
+.headerContainer {
+  height: 60px;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+}

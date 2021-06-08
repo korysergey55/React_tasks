@@ -1,13 +1,19 @@
 import React from "react";
-import data from "../../../data";
+import { flexible, listItem, anchor } from "./HeaderList.module.css";
 
-const HeaderList = () => {
+const HeaderList = ({ data }) => {
   return (
-    <ul>
-      {data.header.map((headerItem) => (
-        <li key={headerItem}>{headerItem}</li>
-      ))}
-    </ul>
+    <nav>
+      <ul className={`list ${flexible}`}>
+        {data.map((headerItem) => (
+          <li key={headerItem} className={listItem}>
+            <a href={`${headerItem}`} className={anchor}>
+              {headerItem}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

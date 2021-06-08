@@ -1,0 +1,14 @@
+.flexible {
+  display: flex;
+  align-items: center;
+}
+
+.listItem:not(:last-child) {
+  margin-right: 20px;
+}
+
+.anchor {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: cornflowerblue;
+}

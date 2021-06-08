@@ -1,10 +1,11 @@
 import React from "react";
 import HeaderList from "./headerList/HeaderList";
+import { headerContainer } from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ data }) => {
   return (
-    <header>
-      <HeaderList />
+    <header className={headerContainer}>
+      <HeaderList data={data} />
     </header>
   );
 };

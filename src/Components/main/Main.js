@@ -7,7 +7,7 @@ import Section from "../section/Section";
 const Main = () => {
   return (
     <main>
-      <Section title='Мобильные телефоны'>
+      <Section title='Мобильные телефоны' isMobiles={true}>
         <PhoneList phones={data.phones} />
       </Section>
       <Section title='Ноутбуки'>
