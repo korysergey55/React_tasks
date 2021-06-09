@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-
 export const ListItemContainer = styled.li`
   width: 100%;
-  padding: 10px;
+  padding: 20px;
 
   .content {
     border-radius: 14px;
     border: 1px solid grey;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 330px;
   }
   .listItemTitle {
