@@ -1,6 +1,9 @@
 import React from "react";
 
-const PhoneListItem = ({ phone }) => {
+const PhoneListItem = ({ phone, addToCart }) => {
+  const addProduct = () => {
+    addToCart(phone);
+  };
   return (
     <li>
       <h3>{phone.name}</h3>
@@ -18,6 +21,9 @@ const PhoneListItem = ({ phone }) => {
       <p>
         Цена: <span>{phone.price}</span>
       </p>
+      <button type='button' onClick={addProduct}>
+        Добавить в корзину
+      </button>
     </li>
   );
 };
