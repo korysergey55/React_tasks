@@ -1,19 +1,20 @@
 import React from "react";
-import { flexible, listItem, anchor } from "./HeaderList.module.css";
+
+import { HeaderNavigation } from "./HeaderListStyled";
 
 const HeaderList = ({ data }) => {
   return (
-    <nav>
-      <ul className={`list ${flexible}`}>
+    <HeaderNavigation>
+      <ul className="navigationList">
         {data.map((headerItem) => (
-          <li key={headerItem} className={listItem}>
-            <a href={`${headerItem}`} className={anchor}>
+          <li key={headerItem} className="navigationListItem">
+            <a href={`${headerItem}`} className="navigationListItemAnchor">
               {headerItem}
             </a>
           </li>
         ))}
       </ul>
-    </nav>
+    </HeaderNavigation>
   );
 };
 

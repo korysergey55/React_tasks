@@ -1,13 +1,14 @@
 import React from "react";
 import LaptopListItem from "./laptopListItem/LaptopListItem";
+import { LaptopListContainer } from "./LaptopListStyled";
 
 const LaptopList = ({ laptops }) => {
   return (
-    <ul>
+    <LaptopListContainer>
       {laptops.map((laptop) => (
-        <LaptopListItem {...laptop} key={laptop.id} />
+        <LaptopListItem laptop={laptop} key={laptop.id} />
       ))}
-    </ul>
+    </LaptopListContainer>
   );
 };
 

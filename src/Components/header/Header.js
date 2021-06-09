@@ -1,16 +1,23 @@
 import React from "react";
 import HeaderList from "./headerList/HeaderList";
-import { headerContainer, icon } from "./Header.module.css";
+
 import sprite from "../../icons/header/symbol-defs.svg";
+import { HeaderContainer } from "./HeaderStyled";
 
 const Header = ({ data }) => {
   return (
-    <header className={headerContainer}>
-      <svg className={icon}>
+    <HeaderContainer>
+      <svg className='headerIcon'>
         <use href={sprite + "#icon-home"} />
       </svg>
-      <HeaderList data={data} />
-    </header>
+      {window.screen.width < 768 ? (
+        <svg className='headerIcon'>
+          <use href={sprite + "#icon-menu"} />
+        </svg>
+      ) : (
+        <HeaderList data={data} />
+      )}
+    </HeaderContainer>
   );
 };
 

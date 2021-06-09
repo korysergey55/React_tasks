@@ -1,24 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ListItemContainer } from "./LaptopListItemStyled";
 
-const LaptopListItem = ({ ...laptop }) => {
-  console.log("data", laptop);
+const LaptopListItem = ({ laptop }) => {
   return (
-    <li>
-      {/* <h3>{name}</h3>
-      <img src={image} alt={name} />
-      <p>
-        Sale:{" "}
-        <span>
-          {isSale ? "Действует акционная цена" : "В акции не участвует"}
-        </span>
-      </p>
-      <p>{description}</p>
-
-      <p>
-        Цена: <span>{price}</span>
-      </p> */}
-    </li>
+    <ListItemContainer>
+      <div className='content'>
+        <h3 className='listItemTitle'>{laptop.name}</h3>
+        <div className='imageWrapper'>
+          <img src={laptop.image} alt={laptop.name} className='listItemImage' />
+        </div>
+        <p className='priceTitle'>
+          {laptop.isSale ? (
+            <>
+              <span className='withSalePrice'>{laptop.price - 1000} </span>
+              <span className='withoutSalePrice'>{laptop.price}</span>
+            </>
+          ) : (
+            <span className='withoutSalePrice'>{laptop.price}</span>
+          )}
+          {" грн"}
+        </p>
+      </div>
+    </ListItemContainer>
   );
 };
 

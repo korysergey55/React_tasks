@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const ColorItemLI = styled.li`
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  border: 1px solid black;
-  background-color: ${(props) => props.color};
-  margin-right: 10px;
-`;
 
 export const ListItemContainer = styled.li`
   width: 100%;
