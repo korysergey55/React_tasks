@@ -1,5 +1,4 @@
-# React_tasks
-    #lesson1: "Components && collections"
+# lesson1: "Components && collections"
         Task 1. Инициализация нового проекта 
             - создайте на GitHub новый репозиторий под будующий проект Shop.
             - склонируйте репозиторий в удобную для Вас папку на Вашем компьютере.
@@ -303,6 +302,7 @@
 
 
 
+Task 1. Инициализация нового проекта 
 
 
 
@@ -310,4 +310,12 @@
 
 
 
+
+# lesson2: "Styles"
+     Task 1. Добавить стилизацию компонента Header
+     Task 2. Добавить стилизацию компонентов LaptopList && LaptopListItem
+     Task 3. Добавить стилизацию компонентов PhoneList && PhoneListItem
+     Task 3. Добавить стилизацию компонента Section
+
+# lesson3: "State && events";
 
