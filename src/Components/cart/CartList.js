@@ -1,11 +1,18 @@
 import React from "react";
 import CartListItem from "./cartListItem/CartListItem";
+import { CartListContainer, CartListContainerWrapper } from "./CartListStyled";
+
 const CartList = ({ cart, removeFromCart, removeAllFromCart }) => {
+  const getTotalPrice = () =>
+    cart.reduce((acc, product) => {
+      acc += product.price;
+      return acc;
+    }, 0);
   return (
-    <div className='cartContainer'>
+    <CartListContainerWrapper>
       {cart.length ? (
         <>
-          <ul className='cartList'>
+          <CartListContainer>
             {cart.map((product) => (
               <CartListItem
                 key={product.id}
@@ -13,15 +20,24 @@ const CartList = ({ cart, removeFromCart, removeAllFromCart }) => {
                 removeFromCart={removeFromCart}
               />
             ))}
-          </ul>
-          <button type='button' onClick={removeAllFromCart}>
+          </CartListContainer>
+          <div className='totalInfo'>
+            <p className='totalInfoTitle'>Общая сумма заказа:</p>
+            <p className='totalInfoPrice'>
+              {getTotalPrice()} <span className='totalInfoTitle'>грн</span>
+            </p>
+          </div>
+          <button
+            type='button'
+            onClick={removeAllFromCart}
+            className='orderButton'>
             Оформить заказ
           </button>
         </>
       ) : (
         <p>Добавьте товары в корзину</p>
       )}
-    </div>
+    </CartListContainerWrapper>
   );
 };
 

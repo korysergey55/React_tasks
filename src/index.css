@@ -16,6 +16,16 @@ code {
   box-sizing: border-box;
 }
 
-:global(.list) {
-  list-style: none;
+button {
+  background-color: #819ff5;
+  height: 30px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  text-transform: uppercase;
+}
+button:hover {
+  background-color: #5f73a1;
+  cursor: pointer;
 }

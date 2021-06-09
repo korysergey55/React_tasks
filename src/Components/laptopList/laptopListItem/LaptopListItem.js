@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ListItemContainer } from "./LaptopListItemStyled";
 
-const LaptopListItem = ({ laptop }) => {
+const LaptopListItem = ({ laptop, addToCart }) => {
+  const addProduct = () => {
+    addToCart(laptop);
+  };
   return (
     <ListItemContainer>
       <div className='content'>
@@ -13,7 +16,7 @@ const LaptopListItem = ({ laptop }) => {
         <p className='priceTitle'>
           {laptop.isSale ? (
             <>
-              <span className='withSalePrice'>{laptop.price - 1000} </span>
+              <span className='withSalePrice'>{laptop.price - 1000}</span>{" "}
               <span className='withoutSalePrice'>{laptop.price}</span>
             </>
           ) : (
@@ -21,6 +24,7 @@ const LaptopListItem = ({ laptop }) => {
           )}
           {" грн"}
         </p>
+        <button onClick={addProduct}>Добавить в корзину</button>
       </div>
     </ListItemContainer>
   );

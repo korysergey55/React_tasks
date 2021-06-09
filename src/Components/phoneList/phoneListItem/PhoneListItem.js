@@ -21,14 +21,17 @@ const PhoneListItem = ({ phone, addToCart }) => {
         <p className='priceTitle'>
           {phone.isSale ? (
             <>
-              <span className='withSalePrice'>{phone.price - 1000} </span>
-              <span className='withoutSalePrice'>{phone.price}</span>
+              <span className='withSalePrice'> {phone.price}</span>{" "}
+              <span className='withoutSalePrice'>
+                {(phone.price - phone.price / 10).toFixed(0)}
+              </span>
             </>
           ) : (
             <span className='withoutSalePrice'>{phone.price}</span>
           )}
           {" грн"}
         </p>
+        <button onClick={addProduct}>Добавить в корзину</button>
       </div>
     </ListItemContainer>
   );

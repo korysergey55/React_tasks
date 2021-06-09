@@ -4,6 +4,7 @@ import CartList from "../cart/CartList";
 import LaptopList from "../laptopList/LaptopList";
 import PhoneList from "../phoneList/PhoneList";
 import Section from "../section/Section";
+import { MainContainer } from "./MainStyled";
 
 class Main extends Component {
   state = {
@@ -18,7 +19,7 @@ class Main extends Component {
   removeAllFromCart = () => this.setState({ cart: [] });
   render() {
     return (
-      <main>
+      <MainContainer>
         <Section title='Корзина'>
           <CartList
             cart={this.state.cart}
@@ -29,12 +30,21 @@ class Main extends Component {
         <Section title='Мобильные телефоны'>
           <PhoneList phones={data.phones} addToCart={this.addToCart} />
         </Section>
-        {/* <Section title='Ноутбуки'>
-        <LaptopList laptops={data.laptops} />
-      </Section> */}
-      </main>
+        <Section title='Ноутбуки'>
+          <LaptopList laptops={data.laptops} addToCart={this.addToCart} />
+        </Section>
+      </MainContainer>
     );
   }
 }
 
 export default Main;
+
+// const setState = (func) => {
+//   const state = {
+//     cart: []
+//   }
+//   func(state)
+// }
+
+//  setState((fdfdsfdsdsffdsfsdfsdds)=>({cart: [...fdfdsfdsdsffdsfsdfsdds.cart, {name: "fghjk"} ]}));
