@@ -1,10 +1,10 @@
 import React from "react";
-import { container, title } from "./Section.module.css";
+import styles from "./Section.module.css";
 
 const Section = ({ children, title: myTitle, isMobiles }) => {
   return (
-    <div className={container}>
-      <h2 className={title}>{myTitle.toUpperCase()}</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>{myTitle.toUpperCase()}</h2>
       {children}
     </div>
   );

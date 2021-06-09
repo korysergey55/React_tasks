@@ -1,0 +1,27 @@
+.block {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.green {
+  background-color: green;
+  composes: block;
+}
+.red {
+  background-color: red;
+  composes: block;
+}
+.white {
+  background-color: white;
+  composes: block;
+}
+.blue {
+  background-color: blue;
+  composes: block;
+}
+.grey {
+  background-color: grey;
+  composes: block;
+}

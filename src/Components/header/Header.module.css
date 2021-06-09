@@ -3,4 +3,12 @@
   background-color: grey;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.icon {
+  fill: cornflowerblue;
+  width: 40px;
+  height: 40px;
 }

@@ -7,9 +7,9 @@ import Section from "../section/Section";
 const Main = () => {
   return (
     <main>
-      <Section title='Мобильные телефоны' isMobiles={true}>
+      {/* <Section title='Мобильные телефоны' isMobiles={true}>
         <PhoneList phones={data.phones} />
-      </Section>
+      </Section> */}
       <Section title='Ноутбуки'>
         <LaptopList laptops={data.laptops} />
       </Section>
