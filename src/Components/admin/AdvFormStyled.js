@@ -19,6 +19,10 @@ export const AdvFormContainer = styled.div`
     margin: 5px 0;
     font-size: 14px;
     outline: none;
+    &:hover {
+      border: 2px solid #5f73a1;
+      cursor: pointer;
+    }
   }
   .advFormLabelCheckBox {
     display: flex;
