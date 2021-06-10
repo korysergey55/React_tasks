@@ -116,13 +116,20 @@
                     this.setState(prevState=> ({[category]: [...prevState[category], product]}));
                 };
             - Передайте в компонент AdvForm созданный метод.
-            - В компоненте AdvForm, в методе, который срабатывает по событию onSubmit, вызывайте полученный в пропах метод и передайте те данные, которые необходимы. Используйте деструктуризацию стейта, чтобы код был чище и понятнее. 
+            - В компоненте AdvForm, в методе, который срабатывает по событию onSubmit, вызывайте полученный в пропах метод и передайте те данные, которые необходимы. Используйте деструктуризацию стейта, чтобы код был чище и понятнее. В данной реализации необходимо также предусмотреть добавление уникального id продукта. Используйте библиотеку uuid. Значение цены тоже необходимо передавать как число.
                 
                 onHandleSubmit = (e) => {
                     e.preventDefault();
                     const { category, name, image, description, price, isSale } = this.state;
-                    this.props.addNewAdv(category, { name, image, description, price, isSale });
-                };
+                        this.props.addNewAdv(category, {
+                            name,
+                            image,
+                            description,
+                            price: Number(price),
+                            isSale,
+                            id: uuidv4(),
+                            });
+                    };
             - Очистите поля ввода в форме после добавления продукта
             - Проверьте работоспособность кода.
 
