@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import data from "../../data";
+import AdvForm from "../admin/AdvForm";
 import CartList from "../cart/CartList";
 import LaptopList from "../laptopList/LaptopList";
 import PhoneList from "../phoneList/PhoneList";
@@ -9,7 +10,13 @@ import { MainContainer } from "./MainStyled";
 class Main extends Component {
   state = {
     cart: [],
+    ...data,
   };
+
+  addNewAdv = (category, product) => {
+    this.setState(prevState=> ({[category]: [...prevState[category], product]}));
+  };
+
   addToCart = (product) =>
     this.setState((prev) => ({ cart: [...prev.cart, product] }));
   removeFromCart = (id) =>
@@ -20,6 +27,9 @@ class Main extends Component {
   render() {
     return (
       <MainContainer>
+        <Section title='Добавление нового объявления'>
+          <AdvForm addNewAdv={this.addNewAdv}/>
+        </Section>
         <Section title='Корзина'>
           <CartList
             cart={this.state.cart}
@@ -28,10 +38,10 @@ class Main extends Component {
           />
         </Section>
         <Section title='Мобильные телефоны'>
-          <PhoneList phones={data.phones} addToCart={this.addToCart} />
+          <PhoneList phones={this.state.phones} addToCart={this.addToCart} />
         </Section>
         <Section title='Ноутбуки'>
-          <LaptopList laptops={data.laptops} addToCart={this.addToCart} />
+          <LaptopList laptops={this.state.laptops} addToCart={this.addToCart} />
         </Section>
       </MainContainer>
     );

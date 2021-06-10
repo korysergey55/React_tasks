@@ -6,7 +6,7 @@ export const ListItemContainer = styled.li`
 
   .content {
     border-radius: 14px;
-    border: 1px solid grey;
+    border: 1px solid #a8a8a8;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@ export const ListItemContainer = styled.li`
   }
 
   .imageWrapper {
-    height: 170px;
+    height: 130px;
     display: flex;
     justify-content: center;
     padding: 10px 0;
