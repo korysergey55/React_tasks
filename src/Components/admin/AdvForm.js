@@ -3,6 +3,7 @@ import { AdvFormContainer } from "./AdvFormStyled";
 import { v4 as uuidv4 } from "uuid";
 
 const productCategories = ["phones", "laptops"];
+
 const initialState = {
   category: productCategories[0],
   name: "",
@@ -44,6 +45,7 @@ class AdvForm extends Component {
         <form onSubmit={this.onHandleSubmit} className='advForm'>
           <div className='advFormContent'>
             <div className='leftColumn'>
+              
               <label className='advFormLabel'>
                 Категория
                 <select
@@ -58,6 +60,9 @@ class AdvForm extends Component {
                   ))}
                 </select>
               </label>
+
+
+
               <label className='advFormLabel'>
                 Название продукта
                 <input
@@ -122,3 +127,8 @@ class AdvForm extends Component {
 }
 
 export default AdvForm;
+
+
+const arr = [[100,200], [300, 500]];
+const [,[,y2]] = arr 
+console.log(y2);
