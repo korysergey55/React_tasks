@@ -19,6 +19,7 @@ class Header extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResizeWindow);
   }
+
   handleResizeWindow = () => this.setState({ width: window.innerWidth });
 
   setModalState = () =>

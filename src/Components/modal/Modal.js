@@ -7,6 +7,7 @@ class Modal extends Component {
     const body = document.querySelector("body");
     body.style.overflow = "hidden";
   }
+
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleEsc);
     const body = document.querySelector("body");
