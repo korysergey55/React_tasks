@@ -1,137 +1,98 @@
 
-# lesson4: "Forms";
-    Task 1. Добавление данных о продуктах в стейт классового компонента Main.
-        - произведите рефакторинг стейта компонента Main так, чтобы данные, которые находятся в импортруемом объекте data, попали в стейт. 
-            state = {
-                cart: [],
-                ...data
-            };
-        - передавайте компонентам PhoneList и LaptopList данные из стейта. 
-        - проверьте работоспособность кода.
+# lesson5: "Life circles";
+    Task 1. Динамическое изменение панели навигации в компоненте Header.
+        - перепишите компонент Header на классовый комонент
+        - добавьте стейт с двумя значениями:
+            -- width, который будут равен текущему значению window.innerWidth.
+            -- breakPoint, который будет равен точке перелома для мобильного разрешения (обычно оно равно 768) .
+        - напишите метод handleResizeWindow, который будет устанавливать новое значение стейта width на window.innerWidth 
+        - используя метод жизненого цикла componentDidMount, добавьте слушатель на событие "resize", при котором будет срабатывать метод handleResizeWindow.
+        - в методе жизненого цикла componentWillUnmount, снимите слушатель на событие "resize", при котором будет срабатывает метод handleResizeWindow.
+        - измените в компоненте условие, при котором происходит перерисовка компонента, в соответсвии с внесенными измененияи.
+        - Убедитесь, что приложение работает корректно.
 
-    Task 2. Создание формы объявления.
-        - Создайте в папке Components папку admin, а в ней классовый компонент AdvForm.
-        - В компоненте AdvForm создайте стейт со свойствами, которые будут необходимы для создания нового объявления. Например такими:
-             state = {    
-                name: "",
-                image: "",
-                description: "",
-                price: 0,
-                isSale: false
-            }
-        - создайте разметку, которая будет включать в себя:
-            - тег <form></form>
-            - внутри тега form будут находится теги <label> и <input>. Создайте их столько, сколько данных Вы планируете добавлять в объявление.
-                <label className="advFormLabel">
-                    <input type="text" className="advFormInput" />
-                </label>   
-            - для каждого input добавьте атрибуты name и value. Значение name должно быть идентичным свойству, которое записано в стейте. А значение value будет самим этим значением. Вы получите примерно такую разметку:
+    Task 2. Создание переиспользуемого компонента Modal, который будет использоваться для всего проекта. Компонент ожидает в пропах разметку (children) и метод на закрытие модального окна hideModal
+        - Создайте классовый компонент Modal.
+        - Создайте стилизованый компонент-обертку div со следующими стилями:
+            
+            export const ModalContainer = styled.div`
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #000000b2;
+                z-index: 1200;
+                overflow: auto;
 
-                <form>
-                   <label className='advFormLabel'>
-                    Название продукта
-                    <input
-                        type='text'
-                        name='name'
-                        value={this.state.name}
-                        className='advFormInput'
-                    />
-                    </label>
-                    <label className='advFormLabel'>
-                    Изображение
-                    <input
-                        type='text'
-                        name='image'
-                        value={this.state.image}
-                        className='advFormInput'
-                    />
-                    </label>
-                    <label className='advFormLabel'>
-                    Описание
-                    <input
-                        type='text'
-                        name='description'
-                        value={this.state.description}
-                        className='advFormInput'
-                    />
-                    </label>
-                    <label className='advFormLabel'>
-                    Цена
-                    <input
-                        type='text'
-                        name='price'
-                        value={this.state.price}
-                        className='advFormInput'
-                    />
-                    </label>
-                </form>
+                .Modal {
+                    position: relative;
+                    background-color: #3d3d3d;
+                    border-radius: 14px;
+                    overflow: hidden;
+                }
 
-            - Для свойства isSale нужно создать <input type='checkbox'/>
-                   <label className='advFormLabel'>
-                        Учавствует в распродаже
-                        <input
-                            type='checkbox'
-                            name='isSale'
-                            checked={this.state.isSale}
-                            className='advFormCheckBox'
-                            onChange={this.onHandleChange}
-                        />
-                    </label>
-            - В компоненте Main добавьте компонент AdvForm в разметку. Проверьте, что все отображается корректно.
-            - Создайте метод, который по событию onChange на элементе input будет изменять стейт. Предусмотрите то, что для разных типов input стейт будет изменяться по разному. Используйте вычисляемые свойства объекта.
-            - Добавьте в форму кнопку  <button type="submit">Добавить продукт</button>, а на саму форму метод, которые будет отрабатывать при submit.
-            - Выведите в консоль браузера получаемый результат в виде объекта.
+                .modalIcon {
+                    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .modalBtn {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    fill: #504f4f;
+                }
+                .modalBtn:hover {
+                    fill: #819ff5;
+                }
+                `; 
+        - добавьте в разметку соответствующий элемент <div className='modal'></div>. Данный элемент будет рендерить динамическую разметку. Добавьте проп children внутрь него.
+        - напишите методы, которые отвечают за:
+            - закрытие модального окна по клику на кнопку "Escape". Используйте проверку if (e.code === "Escape") {}. Добавьте внутрь вызов метода закрытия модального окна, который приходит а пропах(hideModal)
+            - закрытие модального окна по клику на элемент.
+            - закрытие модального окна по клику на серый фон. Используйте проверку, которая предусматривает проверку, что элементом на котором произошло событие является элемент на котором оно было объявлено в методе onClick.
+                if (e.target !== e.currentTarget) return;
+        -добавьте методы жизненого цикла, которые:
+            - добавляют слушателя на "keydown" при монтировании
+            - удаляют слушателя на "keydown" при размонтировании
 
-        Task 3. Добавление объявления в стейт компонента Main.
-            - В компоненте AdvForm создайте массив с двумя элементами, которые соответствуют категории товара, находящимся в стейте компонента Main. Например так: const productCategories = ["laptops", "phones"];
-            - Добавьте в стейт компонента свойство category, со значением первого элемента созданного Вами массива.  
+    Task 3. Подключение компонета Modal в компоненте Header.
+        - добавьте в стейт компонента свойство isModalOpen со значение false, которое будет отвечать за рендер компонента Modal по условию. Добавьте в разметку это условие.
+        - создайте метод setModalState, который будет отвечать за изменение значение свойства isModalOpen на противоположное.
+        - добавьте событие onClick на иконку бургер-меню.
+            onClick={this.setModalState}
+        - Убедитесь, что приложение работает корректно.
+        - Передайте в компонент Modal проп children. Им должен быть компонент навигации 
+            {isModalOpen && (
+                <Modal hideModal={this.setModalState}>
+                    <HeaderList data={this.props.data} />
+                </Modal>
+            )}
+        - Сделайте рефакторинг стилей в компоненте HeaderList так, чтобы:
+            - элементы отображались в колонку.
+            - выберите оптимальные размеры окна. Рекомендовано отступ как и в header(60px) с динамическим расчетом содержимого при помощи calc(100vh - 60px). width рекомендовано сделать на всю ширину экрана.
+            - добавьте другие стили на свое усмотрение.  
 
-                state = {
-                    category: productCategories[0],
-                    name: "",
-                    image: "",
-                    description: "",
-                    price: 0,
-                    isSale: false,
-                };
+    Task 4. Предотвращение прокрутки содержимого за компонетом Modal.
+        - для предотвращения прокрутки содержимого за компонентом добавьте:
+            - при монтировании следующий код:
+                const body = document.querySelector("body");
+                body.style.overflow = "hidden";
+            - при размонтировании следующий код:
+                const body = document.querySelector("body");
+                body.style.overflow = "auto";
 
-            - Добавьте в форму элемент select c элементами option, которые будут формироваться исходя из данных, находящихся в массиве. Добавьте необходимые аттрибуты и метод, который будет срабатывать по событию onChange. 
-
-                <label className='advFormLabel'>
-                    Категория
-                    <select
-                        value={this.state.category}
-                        name='category'
-                        onChange={this.onHandleChange}>
-                        {productCategories.map((category) => (
-                            <option value={category} key={category}>{category}</option>
-                        ))}
-                    </select>
-                </label>
-
-            - Проверьте работоспособность Ващего кода.
-            - В компоненте Main создайте метод добавления продукта, который будет в параметрах содержать название категории и добавляемый продукт. При вызове метода, в стейте будет изменться результирующий массив только выбранной категории. Использовать нужно вычисляемые свойства объекта.
-
-                addNewAdv = (category, product) => {
-                    this.setState(prevState=> ({[category]: [...prevState[category], product]}));
-                };
-            - Передайте в компонент AdvForm созданный метод.
-            - В компоненте AdvForm, в методе, который срабатывает по событию onSubmit, вызывайте полученный в пропах метод и передайте те данные, которые необходимы. Используйте деструктуризацию стейта, чтобы код был чище и понятнее. В данной реализации необходимо также предусмотреть добавление уникального id продукта. Используйте библиотеку uuid. Значение цены тоже необходимо передавать как число.
-                
-                onHandleSubmit = (e) => {
-                    e.preventDefault();
-                    const { category, name, image, description, price, isSale } = this.state;
-                        this.props.addNewAdv(category, {
-                            name,
-                            image,
-                            description,
-                            price: Number(price),
-                            isSale,
-                            id: uuidv4(),
-                            });
-                    };
-            - Очистите поля ввода в форме после добавления продукта
-            - Проверьте работоспособность кода.
+    
 
 
 
