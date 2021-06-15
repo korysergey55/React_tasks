@@ -2,7 +2,7 @@ import React from "react";
 import CartListItem from "./cartListItem/CartListItem";
 import { CartListContainer, CartListContainerWrapper } from "./CartListStyled";
 
-const CartList = ({ cart, removeFromCart, removeAllFromCart }) => {
+const CartList = ({ cart, removeFromCart, createOrder }) => {
   const getTotalPrice = () =>
     cart.reduce((acc, product) => {
       acc += product.price;
@@ -29,7 +29,7 @@ const CartList = ({ cart, removeFromCart, removeAllFromCart }) => {
           </div>
           <button
             type='button'
-            onClick={removeAllFromCart}
+            onClick={createOrder}
             className='orderButton'>
             Оформить заказ
           </button>

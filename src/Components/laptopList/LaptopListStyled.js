@@ -5,4 +5,9 @@ export const LaptopListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+
+  .errorTitle {
+    width: 100%;
+    text-align: center;
+  }
 `;
