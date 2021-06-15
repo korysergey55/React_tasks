@@ -31,6 +31,7 @@ class Main extends Component {
     }
   };
 
+
   getLaptops = async () => {
     const response = await getAllAdvByCategory("laptops");
     if (response) {
@@ -77,10 +78,18 @@ class Main extends Component {
           />
         </Section>
         <Section title='Мобильные телефоны'>
-          <PhoneList phones={this.state.phones} addToCart={this.addToCart} />
+          <PhoneList
+            phones={this.state.phones}
+            addToCart={this.addToCart}
+            error={this.state.error}
+          />
         </Section>
         <Section title='Ноутбуки'>
-          <LaptopList laptops={this.state.laptops} addToCart={this.addToCart} />
+          <LaptopList
+            laptops={this.state.laptops}
+            addToCart={this.addToCart}
+            error={this.state.error}
+          />
         </Section>
       </MainContainer>
     );
@@ -88,5 +97,3 @@ class Main extends Component {
 }
 
 export default Main;
-
-
