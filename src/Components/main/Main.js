@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import data from "../../data";
 import { createNewOrder, getAllAdvByCategory } from "../../services/api";
 import AdvForm from "../admin/AdvForm";
 import CartList from "../cart/CartList";
@@ -90,11 +89,4 @@ class Main extends Component {
 
 export default Main;
 
-// const setState = (func) => {
-//   const state = {
-//     cart: []
-//   }
-//   func(state)
-// }
 
-//  setState((fdfdsfdsdsffdsfsdfsdds)=>({cart: [...fdfdsfdsdsffdsfsdfsdds.cart, {name: "fghjk"} ]}));

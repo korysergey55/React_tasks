@@ -1,5 +1,6 @@
 import React from "react";
-import { ColorItemLI, ListItemContainer } from "./PhoneListItemStyled";
+// import {  ColorItemLI } from "./PhoneListItemStyled";
+import { ListItemContainer } from "./PhoneListItemStyled";
 
 const PhoneListItem = ({ phone, addToCart }) => {
   const addProduct = () => {
