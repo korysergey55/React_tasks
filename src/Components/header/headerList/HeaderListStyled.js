@@ -31,6 +31,8 @@ export const HeaderNavigation = styled.nav`
       background-color: inherit;
       margin-top: 0;
       padding-top: 0;
+      align-items: center;
+      justify-content;
     }
     .navigationListItem {
       margin-top: 0;
@@ -41,7 +43,4 @@ export const HeaderNavigation = styled.nav`
     }
   }
 
-  @media (min-width: 1024px) {
-    width: 25%;
-  }
 `;
