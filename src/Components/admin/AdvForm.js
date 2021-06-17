@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AdvFormContainer } from "./AdvFormStyled";
 import { v4 as uuidv4 } from "uuid";
+import { createNewAdv } from "../../services/api";
 
 const productCategories = ["phones", "laptops"];
 
@@ -29,13 +30,14 @@ class AdvForm extends Component {
   onHandleSubmit = (e) => {
     e.preventDefault();
     const { category, name, image, description, price, isSale } = this.state;
+    const response = createNewAdv(this.state.category, { ...this.state });
     this.props.addNewAdv(category, {
       name,
       image,
       description,
       price: Number(price),
       isSale,
-      id: uuidv4(),
+      id: response.name,
     });
     this.setState({ ...initialState });
   };
@@ -45,7 +47,6 @@ class AdvForm extends Component {
         <form onSubmit={this.onHandleSubmit} className='advForm'>
           <div className='advFormContent'>
             <div className='leftColumn'>
-              
               <label className='advFormLabel'>
                 Категория
                 <select
@@ -60,8 +61,6 @@ class AdvForm extends Component {
                   ))}
                 </select>
               </label>
-
-
 
               <label className='advFormLabel'>
                 Название продукта
@@ -128,7 +127,9 @@ class AdvForm extends Component {
 
 export default AdvForm;
 
-
-const arr = [[100,200], [300, 500]];
-const [,[,y2]] = arr 
+const arr = [
+  [100, 200],
+  [300, 500],
+];
+const [, [, y2]] = arr;
 console.log(y2);

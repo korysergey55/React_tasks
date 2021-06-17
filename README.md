@@ -1,105 +1,71 @@
 
-# lesson5: "React Router";
+# lesson5: "Code_splitting";
 
-    Task 1. Подключение библиотеки react-router-dom в проект.
-        - установите пакет react-router-dom
-        - в файле index.js (в папке src), оберните весь проект в компонент <BrowserRouter>.
-        
-    Task 2. Создание страниц навигации.
-        - Создайте в папке src папку pages, а в ней компоненты HomePage, ProductsPage, CartPage, AdminPage, ProfilePage и AuthPage.
-        - Содержимым компонентов пусть, будет разметка из объекта Main по соответствующим компонентам (перенесите их). Выполните соответствующие импорты и произведите рефакторинг пропов. Пока содержимое компонетов Section закоментируйте
-    
-    Task 3. Создание массива объектов навигации.
-        - создайте в папке src папку routes, а в ней файл mainRoutes.js.
-        - добавьте в файл массив объектов mainRoutes.
-            export const mainRoutes = [
-                {
-                    name: "Home",
-                    path: "/",
-                    component: HomePage,
-                    exact: true,
-                },
-                {
-                    name: "Products",
-                    path: "/products",
-                    component: ProductsPage,
-                    exact: false,
-                },
-                {
-                    name: "Cart",
-                    path: "/cart",
-                    component: CartPage,
-                    exact: false,
-                },
-                {
-                    name: "Administration",
-                    path: "/admin",
-                    component: AdminPage,
-                    exact: false,
-                },
-                {
-                    name: "Registration",
-                    path: "/registration",
-                    component: AuthPage,
-                    exact: false,
-                },
-                {
-                    name: "Login",
-                    path: "/login",
-                    component: AuthPage,
-                    exact: false,
-                },
-            ];
-            - Произведите импорт соответствующих компонентов.
+    Task 1. Рендер динамически загружаемых компонентов.
+        - Произвести рефакторинг кода mainRoutes.js:
+            -- в файле mainRoutes.js импортировать функцию lazy
+                import { lazy } from "react";
+            -- применить функцию-згарузчик, которая возвращает результат динамического импорта
+                Пример:
+                    {
+                        name: "Home",
+                        path: "/",
+                        component: lazy(() => import("../pages/HomePage")),
+                        exact: true,
+                    },
+        - Произвести рефакторинг кода mainRoutes.js:
+            -- в компонене Main импортировать компонет Suspense
+                import { lazy } from "react";
+            -- обернуть возвращаемую разметку (роуты) в компонент Suspense и передать в него проп fallback. В качестве пропа будем на данном этапе передавать fallback={<h2>...loading</h2>}>
+        - Проверить работоспособность кода.
 
-       
+    Task 2. возобновление работы компонентов Cart PhoneList и LaptopList
+        - выполнить ркфакторинг компонента Main:
+            --создать функцию getData, которая будет передавать в компоненты-контейнеры те данные, которые они ожидают
+                Пример:
+                getData = (name) => {
+                    switch (name) {
+                    case "products":
+                        return {
+                        phones: this.state.phones,
+                        laptops: this.state.laptops,
+                        addToCart: this.addToCart,
+                        };
+                    case "cart":
+                        return {
+                        cart: this.state.cart,
+                        removeFromCart: this.removeFromCart,
+                        createOrder: this.createOrder,
+                        };
+                    case "administration":
+                        return {
+                        addNewAdv: this.addNewAdv,
+                        };
 
-    Task 4. Создание маршрутизации в объекте HeaderList.
-        - выполните рефакторинг компонента HeaderList заменив anchor на компонент NavLink. Добавьте классы и активные классы. Используйте массив mainRoutes для создания навигации.
-        - проверьте работоспособность проекта и правильную работу элемнтов навигации.
-        - удалите папку data.
+                    default:
+                        return {};
+                    }
+                };
 
-    Task 5. Рефакторинг компонента Main. Привязка URL и компонета для рендера.
-        - в компоненте main, используя массив mainRoutes, выполните рефакторинг так, чтобы компонент позволял связать определенный URL и компоненты для рендера. Для этого создайте обертку (Switch) и в ней компоненты Route. 
-
-            <MainContainer>
-                <Switch>
-                    {mainRoutes.map(({ path, exact, component }) => (
-                        <Route path={path} exact={exact} component={component} />
-                    ))}
-                </Switch>
-            </MainContainer>
-
-        - проверьте работоспособность проекта и правильную работу элемнтов навигации.  
-    
-    Task 6. Создание вложенной навигации компонета Products
-        - в папке routes создайте файл productsRoutes.js.
-        export const productsRoutes = [
-            {
-                name: "Phones",
-                path: "/phones",
-                component: PhoneList,
-                exact: true,
-            },
-            {
-                name: "Laptops",
-                path: "/laptops",
-                component: LaptopList,
-                exact: true,
-            },
-        ];
-        - в компонете ProductsPage, путем перебора массива productsRoutes добавьте компонеты Navlink. 
-         - проверьте работоспособность проекта и правильную работу элементов навигации.  
-
-
-
-
-       
-
-
+                -- заменить проп component на проп render. Передать данные, которые получаются в результате работы функции getData.
+                -- произвести соответствующие изменения в компонентах-контейнерах и компонентах, которые получают пропы. Разметку передавать следующим образом:
+                    {mainRoutes.map(({ name, path, exact, component: MyComponent }) => (
+                        <Route
+                            path={path}
+                            exact={exact}
+                            render={(props) => (
+                            <MyComponent
+                                {...props}
+                                data={this.getData(name.toLowerCase())}
+                            />
+                            )}
+                            key={path}
+                        />
+                        ))}
+                -- аналогично выполнить рефакторинг компонента ProductsPage
 
 
 
         
-    
+        
     
