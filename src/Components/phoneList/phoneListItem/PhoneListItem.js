@@ -1,9 +1,16 @@
 import React from "react";
 import { ColorItemLI, ListItemContainer } from "./PhoneListItemStyled";
+import { withRouter } from "react-router-dom";
 
-const PhoneListItem = ({ phone, addToCart }) => {
+const PhoneListItem = ({ phone, addToCart, history, match, location }) => {
   const addProduct = () => {
     addToCart(phone);
+  };
+  const openDetails = () => {
+    history.push({
+      pathname: `${match.path}/${phone.id}`,
+      state: { from: location.pathname },
+    });
   };
   return (
     <ListItemContainer>
@@ -31,10 +38,20 @@ const PhoneListItem = ({ phone, addToCart }) => {
           )}
           {" грн"}
         </p>
-        <button onClick={addProduct}>Добавить в корзину</button>
+        <div className='options'>
+          <button
+            onClick={addProduct}
+            className='detailsButton'
+            onClick={openDetails}>
+            Детальнее
+          </button>
+          <button onClick={addProduct} className='addToCartButton'>
+            Добавить в корзину
+          </button>
+        </div>
       </div>
     </ListItemContainer>
   );
 };
 
-export default PhoneListItem;
+export default withRouter(PhoneListItem);

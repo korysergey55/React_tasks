@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { getProductByID } from "../services/api";
+import { ProductDetailsContainer } from "./ProductItemDetailsStyled";
 
 class ProductItemDetails extends Component {
   state = { laptop: null };
@@ -22,7 +23,10 @@ class ProductItemDetails extends Component {
   render() {
     const { laptop } = this.state;
     return (
-      <>
+      <ProductDetailsContainer>
+        <button className='goBack' onClick={this.goBack}>
+          Назад
+        </button>
         {laptop && (
           <div className='content'>
             <h3 className='listItemTitle'>{laptop.name}</h3>
@@ -33,6 +37,7 @@ class ProductItemDetails extends Component {
                 className='listItemImage'
               />
             </div>
+            <p className='description'>{laptop.description}</p>
             <p className='priceTitle'>
               {laptop.isSale ? (
                 <>
@@ -46,10 +51,7 @@ class ProductItemDetails extends Component {
             </p>
           </div>
         )}
-        <button className='goBack' onClick={this.goBack}>
-          Назад
-        </button>
-      </>
+      </ProductDetailsContainer>
     );
   }
 }

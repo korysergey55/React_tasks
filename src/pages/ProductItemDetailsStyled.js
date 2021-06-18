@@ -1,15 +1,6 @@
 import styled from "styled-components";
 
-export const ColorItemLI = styled.li`
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  border: 1px solid black;
-  background-color: ${(props) => props.color};
-  margin-right: 10px;
-`;
-
-export const ListItemContainer = styled.li`
+export const ProductDetailsContainer = styled.div`
   width: 100%;
   padding: 20px;
 
@@ -20,7 +11,7 @@ export const ListItemContainer = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 330px;
+    margin-top: 20px;
   }
   .listItemTitle {
     font-size: 16px;
