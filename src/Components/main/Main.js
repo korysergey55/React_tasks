@@ -1,7 +1,4 @@
 import React, { Component, Suspense } from "react";
-import LaptopList from "../laptopList/LaptopList";
-import PhoneList from "../phoneList/PhoneList";
-import Section from "../section/Section";
 import { MainContainer } from "./MainStyled";
 import { Switch, Route } from "react-router-dom";
 import { mainRoutes } from "../../routes/mainRoutes";

@@ -8,6 +8,17 @@ export const createNewAdv = async (category, newAdv) => {
       baseURL + `advertisements/${category}.json`,
       newAdv
     );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getProductByID = async (category, id) => {
+  console.log("id :>> ", id);
+  try {
+    const response = await axios.get(
+      baseURL + `advertisements/${category}/${id}.json`
+    );
     return response.data;
   } catch (error) {
     console.log(error);

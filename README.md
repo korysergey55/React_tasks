@@ -1,71 +1,62 @@
 
-# lesson5: "Code_splitting";
+# lesson5: "Router props";
 
-    Task 1. Рендер динамически загружаемых компонентов.
-        - Произвести рефакторинг кода mainRoutes.js:
-            -- в файле mainRoutes.js импортировать функцию lazy
-                import { lazy } from "react";
-            -- применить функцию-згарузчик, которая возвращает результат динамического импорта
-                Пример:
+    Task 1. Создание страницы детализации товара.
+        - создайте компонент, который будет отвечать за детализацию информации о товаре (ProductItemDetails). Создайте базовую разметку компонента с заголовком второго уровня "Детали"
+        - в файле productRoute.js:
+            -- добавьте объектам дополнительное свойство isLink. Во всех объектах значение будет true.
+            -- добавьте объект для страницы детализации.
+                Пример: 
                     {
-                        name: "Home",
-                        path: "/",
-                        component: lazy(() => import("../pages/HomePage")),
-                        exact: true,
+                        name: "ProductDetails",
+                        path: "/:category/:productID",
+                        component: lazy(() => import("../pages/ProductItemDetails")),
+                        exact: false,
+                        isLink: false,
                     },
-        - Произвести рефакторинг кода mainRoutes.js:
-            -- в компонене Main импортировать компонет Suspense
-                import { lazy } from "react";
-            -- обернуть возвращаемую разметку (роуты) в компонент Suspense и передать в него проп fallback. В качестве пропа будем на данном этапе передавать fallback={<h2>...loading</h2>}>
-        - Проверить работоспособность кода.
+        - в компоненте ProductsPage, при формировании NavLink (перебор массива productRoutes), добавьте дополнительную проверку на необходимость отрисовки по флагу isLink.
+        - убедитесь, что компонент NavLink не отрисовывается для страницы детализации, а остальные роуты работают корректно.
 
-    Task 2. возобновление работы компонентов Cart PhoneList и LaptopList
-        - выполнить ркфакторинг компонента Main:
-            --создать функцию getData, которая будет передавать в компоненты-контейнеры те данные, которые они ожидают
-                Пример:
-                getData = (name) => {
-                    switch (name) {
-                    case "products":
-                        return {
-                        phones: this.state.phones,
-                        laptops: this.state.laptops,
-                        addToCart: this.addToCart,
-                        };
-                    case "cart":
-                        return {
-                        cart: this.state.cart,
-                        removeFromCart: this.removeFromCart,
-                        createOrder: this.createOrder,
-                        };
-                    case "administration":
-                        return {
-                        addNewAdv: this.addNewAdv,
-                        };
+        - добавьте кнопку "Детальнее" в карточке товара (компоненты LaptopListItem и PhoneListItem).
 
-                    default:
-                        return {};
-                    }
+        - добавьте событие onClick на кнопку. По клику вызывать функцию openDetails, которая будет открывать страницу детализации. Для этого оберните компонент LaptopListItem (PhoneListItem) в функцию высшего порядка withRouter(имортировать из библиотеки react-router-dom)
+
+        - деструктуризируйте в параметрах пропы match и history.
+
+        - в функцию openDetails, при помощи history.push() добавьте переход на страницу детализации. 
+            Пример: 
+                const openDetails = () => {
+                    history.push({
+                    pathname: `${match.path}/${laptop.id}}`,
+                    });
+                };  
+        - Проверьте работоспособность приложения.
+
+    Task 2. Добавление кнопки "Назад".
+        - на странице ProductItemDetails добавьте кнопку назад.
+        - добавьте обработчик собітия onClick с функцией goBack, которая будет осуществлять переход на предыдущую страницу. Для этого:
+            -- в компоненте LaptopListItem (PhoneListItem) в функции openDetails, в объект, передаваемый в history.push(), добавьте дополнительное свойство from, в которое укажите текущий url ()
+                Пример: 
+                    const openDetails = () => {
+                        history.push({
+                        pathname: `${match.path}/${laptop.id}`,
+                        state: { from: location.pathname },
+                        });
+                    };
+            -- оберните ProductItemDetails в функцию высшего порядка withRouter(имортировать из библиотеки react-router-dom);
+            -- в функции goBack выполните метод history.push с аргументами, которые передаются в свойстве location.state.from. Обязательно произведите проверку, что значение state существует. В противном случае, осуществляйте переход на страницу, категория которой, указана в url. Для этого необходимо использовать свойство match.params.category.
+                Пример: 
+                const goBack = () => {
+                    if (location.state) {
+                    history.push(location.state.from);
+                    } else history.push(`/products/${match.params.category}`);
                 };
+            -- проверьте работсоспособность приложения.
 
-                -- заменить проп component на проп render. Передать данные, которые получаются в результате работы функции getData.
-                -- произвести соответствующие изменения в компонентах-контейнерах и компонентах, которые получают пропы. Разметку передавать следующим образом:
-                    {mainRoutes.map(({ name, path, exact, component: MyComponent }) => (
-                        <Route
-                            path={path}
-                            exact={exact}
-                            render={(props) => (
-                            <MyComponent
-                                {...props}
-                                data={this.getData(name.toLowerCase())}
-                            />
-                            )}
-                            key={path}
-                        />
-                        ))}
-                -- аналогично выполнить рефакторинг компонента ProductsPage
+    Task 3. Отрисовка компонента ProductItemDetails в виде карточки. (НЕ ВЫПОЛНЯЕМ НА ПРАКТИКЕ)
 
 
 
-        
-        
-    
+
+
+      

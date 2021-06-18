@@ -1,10 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ListItemContainer } from "./LaptopListItemStyled";
+import { withRouter } from "react-router-dom";
 
-const LaptopListItem = ({ laptop, addToCart }) => {
+const LaptopListItem = ({ laptop, addToCart, history, match, location }) => {
   const addProduct = () => {
     addToCart(laptop);
+  };
+  const openDetails = () => {
+    history.push({
+      pathname: `${match.path}/${laptop.id}`,
+      state: { from: location.pathname },
+    });
   };
   return (
     <ListItemContainer>
@@ -24,13 +31,23 @@ const LaptopListItem = ({ laptop, addToCart }) => {
           )}
           {" грн"}
         </p>
-        <button onClick={addProduct}>Добавить в корзину</button>
+        <div className='options'>
+          <button
+            onClick={addProduct}
+            className='detailsButton'
+            onClick={openDetails}>
+            Детальнее
+          </button>
+          <button onClick={addProduct} className='addToCartButton'>
+            Добавить в корзину
+          </button>
+        </div>
       </div>
     </ListItemContainer>
   );
 };
 
-export default LaptopListItem;
+export default withRouter(LaptopListItem);
 
 LaptopListItem.propTypes = {
   laptop: PropTypes.shape({
@@ -38,6 +55,6 @@ LaptopListItem.propTypes = {
     image: PropTypes.string,
     isSale: PropTypes.bool,
     description: PropTypes.string,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.any,
   }),
 };

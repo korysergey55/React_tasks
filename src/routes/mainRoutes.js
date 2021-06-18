@@ -17,24 +17,24 @@ export const mainRoutes = [
     name: "Cart",
     path: "/cart",
     component: lazy(() => import("../pages/CartPage")),
-    exact: false,
+    exact: true,
   },
   {
     name: "Administration",
     path: "/admin",
     component: lazy(() => import("../pages/AdminPage")),
-    exact: false,
+    exact: true,
   },
   {
     name: "Registration",
     path: "/registration",
     component: lazy(() => import("../pages/AuthPage")),
-    exact: false,
+    exact: true,
   },
   {
     name: "Login",
     path: "/login",
     component: lazy(() => import("../pages/AuthPage")),
-    exact: false,
+    exact: true,
   },
 ];

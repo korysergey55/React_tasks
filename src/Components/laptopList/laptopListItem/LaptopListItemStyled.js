@@ -45,6 +45,20 @@ export const ListItemContainer = styled.li`
     color: #819ff5;
     font-size: 30px;
   }
+  .options {
+    display: flex;
+    align-items: center;
+  }
+  .detailsButton {
+    width: 50%;
+    border-radius: 14px 0 0 14px;
+    margin-right: 1px;
+  }
+  .addToCartButton {
+    width: 50%;
+    border-radius: 0 14px 14px 0;
+    margin-right: 1px;
+  }
 
   @media (min-width: 768px) {
     width: 50%;

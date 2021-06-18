@@ -4,17 +4,15 @@ import { mainRoutes } from "../../../routes/mainRoutes";
 
 import { HeaderNavigation } from "./HeaderListStyled";
 
-const HeaderList = ({ data, hideModal, location }) => {
+const HeaderList = ({ data, hideModal, match }) => {
+  console.log("match :>> ", match);
   return (
     <HeaderNavigation>
       <ul className='navigationList'>
         {mainRoutes.map((route) => (
-          <li key={route.path} className='navigationListItem' key={route.path}>
+          <li className='navigationListItem' key={route.path}>
             <NavLink
-              to={{
-                pathname: route.path,
-                state: { prevPathname: location.pathname },
-              }}
+              to={route.path}
               exact={route.exact}
               className='navigationListItemAnchor'
               activeClassName='navigationListItemActive'
