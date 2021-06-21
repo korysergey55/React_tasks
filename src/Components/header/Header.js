@@ -5,6 +5,7 @@ import HeaderList from "./headerList/HeaderList";
 import sprite from "../../icons/header/symbol-defs.svg";
 import { HeaderContainer } from "./HeaderStyled";
 import Modal from "../modal/Modal";
+import { withRouter } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -24,12 +25,15 @@ class Header extends Component {
 
   setModalState = () =>
     this.setState((prev) => ({ isModalOpen: !prev.isModalOpen }));
+  goHome = () => {
+    this.props.history.push("/");
+  };
 
   render() {
     const { width, breakPoint, isModalOpen } = this.state;
     return (
       <HeaderContainer>
-        <svg className='headerIcon'>
+        <svg className='headerIcon' onClick={this.goHome}>
           <use href={sprite + "#icon-home"} />
         </svg>
         {width < breakPoint ? (
@@ -37,11 +41,11 @@ class Header extends Component {
             <use href={sprite + "#icon-menu"} />
           </svg>
         ) : (
-          <HeaderList data={this.props.data} />
+          <HeaderList />
         )}
         {isModalOpen && (
           <Modal hideModal={this.setModalState}>
-            <HeaderList data={this.props.data} hideModal={this.setModalState} />
+            <HeaderList hideModal={this.setModalState} />
           </Modal>
         )}
       </HeaderContainer>
@@ -49,4 +53,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
