@@ -7,7 +7,7 @@ import { CartListContainer, CartListContainerWrapper } from "./CartListStyled";
 const CartList = ({ cart, removeFromCartByID, createOrder }) => {
   const getTotalPrice = () =>
     cart.reduce((acc, product) => {
-      acc += product.price;
+      acc += Number(product.price);
       return acc;
     }, 0);
   return (

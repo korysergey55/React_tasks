@@ -7,8 +7,8 @@ import { getAllAdvByCategory } from "../../services/api";
 import { addToCart } from "../../redux/cart/cartActions";
 
 class PhoneList extends Component {
-  async componentDidMount() {
-    await this.getPhones();
+  componentDidMount() {
+    this.getPhones();
   }
   getPhones = async () => {
     const response = await getAllAdvByCategory("phones");

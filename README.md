@@ -146,24 +146,19 @@
             
             const SETPHONES = "getPhones";
             const SETLAPTOPS = "getLaptops";
-            const ADDPRODUCT = "addProduct";
             const SETLOADER = "setLoader";
             const SETERROR = "setError";
             const RESETERROR = "resetError";
 
-            export { ADDPRODUCT, SETERROR, SETLOADER, RESETERROR, SETPHONES, SETLAPTOPS };
+            export { SETERROR, SETLOADER, RESETERROR, SETPHONES, SETLAPTOPS };
 
-            const addProduct = (product) => ({
-            type: ADDPRODUCT,
-            payload: product,
-            });
             const setLoader = () => ({ type: SETLOADER });
             const setError = (error) => ({ type: SETERROR, payload: error });
             const resetError = () => ({ type: RESETERROR });
             const setPhones = (phones) => ({ type: SETPHONES, payload: phones });
             const setLaptops = (laptops) => ({ type: SETLAPTOPS, payload: laptops });
 
-            export { addProduct, setError, resetError, setLoader, setPhones, setLaptops };
+            export { setError, resetError, setLoader, setPhones, setLaptops };
 
 
     Task 4. Изменение состояния в хранилище в соответствии с типом действия.
@@ -222,7 +217,6 @@
 
             import { combineReducers } from "redux";
             import {
-            ADDPRODUCT,
             RESETERROR,
             SETERROR,
             SETLAPTOPS,
@@ -232,15 +226,7 @@
 
             const productItemsReducer = (state = { phones: [], laptops: [] }, action) => {
             switch (action.type) {
-                case ADDPRODUCT:
-                return {
-                    ...state,
-                    [action.payload.category]: [
-                    ...state[action.payload.category],
-                    action.payload,
-                    ],
-                };
-                 case SETLAPTOPS:
+                case SETLAPTOPS:
                 return {
                     ...state,
                     laptops: [...action.payload],
@@ -339,6 +325,39 @@
         - переделайте компоненты PhoneList и LaptopList на классовые компоненты. Перенесите необходимую разметку.
         - перенесите из компонета Main необходимые методы для загрузки данных getLaptops и getPhones. Вместо setState подставьте функцию, которая отвечает за изменение состояния в хранилище (actionCreators: setLaptops и setPhones). 
         - создайте метод жизненого цикла componentDidMount. Вызовите соответствующие методы getLaptops и getPhones.
+            -- для компонента LaptopList:
+
+                componentDidMount() {
+                    this.getLaptops();
+                }
+                getLaptops = async () => {
+                    const response = await getAllAdvByCategory("laptops");
+                    if (response) {
+                    const laptops = Object.keys(response).map((key) => ({
+                        id: key,
+                        ...response[key],
+                    }));
+                    this.props.setLaptops(laptops);
+                    }
+                };
+               
+            
+            -- для компонента PhoneList:
+                componentDidMount() {
+                    this.getPhones();
+                }
+                getPhones = async () => {
+                    const response = await getAllAdvByCategory("phones");
+                    if (response) {
+                    const phones = Object.keys(response).map((key) => ({
+                        id: key,
+                        ...response[key],
+                    }));
+                    this.props.setPhones(phones);
+                    }
+                };
+                
+
         - проверьте работоспособность приложения.
 
         

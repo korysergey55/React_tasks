@@ -10,7 +10,7 @@ const initialState = {
   name: "",
   image: "",
   description: "",
-  price: 0,
+  price: "",
   isSale: false,
 };
 

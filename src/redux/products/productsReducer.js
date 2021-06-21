@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import {
-  ADDPRODUCT,
   RESETERROR,
   SETERROR,
   SETLAPTOPS,
@@ -10,14 +9,6 @@ import {
 
 const productItemsReducer = (state = { phones: [], laptops: [] }, action) => {
   switch (action.type) {
-    case ADDPRODUCT:
-      return {
-        ...state,
-        [action.payload.category]: [
-          ...state[action.payload.category],
-          action.payload,
-        ],
-      };
     case SETLAPTOPS:
       return {
         ...state,
