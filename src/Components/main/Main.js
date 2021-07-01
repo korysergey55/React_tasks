@@ -3,6 +3,8 @@ import { MainContainer } from "./MainStyled";
 import { Switch, Route } from "react-router-dom";
 import { mainRoutes } from "../../routes/mainRoutes";
 import { createNewOrder, getAllAdvByCategory } from "../../services/api";
+import store from "../../redux/store";
+import { addToCart } from "../../redux/cart/cartActions";
 
 class Main extends Component {
   state = {

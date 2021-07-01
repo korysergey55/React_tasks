@@ -5,7 +5,7 @@ import AdvForm from "../Components/admin/AdvForm";
 const AdminPage = ({ data }) => {
   return (
     <>
-      <Section title='Добавление нового объявления'>
+      <Section title='Administration'>
         <AdvForm addNewAdv={data.addNewAdv} />
       </Section>
     </>

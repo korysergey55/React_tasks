@@ -29,17 +29,8 @@ class AdvForm extends Component {
   };
   onHandleSubmit = (e) => {
     e.preventDefault();
-    const { category, name, image, description, price, isSale } = this.state;
-    const response = createNewAdv(this.state.category, { ...this.state });
-    this.props.addNewAdv(category, {
-      name,
-      image,
-      description,
-      price: Number(price),
-      isSale,
-      id: response.name,
-    });
-    this.setState({ ...initialState });
+
+    createNewAdv(this.state.category, { ...this.state });
   };
   render() {
     return (
@@ -48,7 +39,7 @@ class AdvForm extends Component {
           <div className='advFormContent'>
             <div className='leftColumn'>
               <label className='advFormLabel'>
-                Категория
+                Category
                 <select
                   value={this.state.category}
                   name='category'
@@ -63,7 +54,7 @@ class AdvForm extends Component {
               </label>
 
               <label className='advFormLabel'>
-                Название продукта
+                Name
                 <input
                   type='text'
                   name='name'
@@ -73,7 +64,7 @@ class AdvForm extends Component {
                 />
               </label>
               <label className='advFormLabel'>
-                Изображение
+                Picture
                 <input
                   type='text'
                   name='image'
@@ -85,7 +76,7 @@ class AdvForm extends Component {
             </div>
             <div className='rightColumn'>
               <label className='advFormLabel'>
-                Описание
+                Description
                 <input
                   type='text'
                   name='description'
@@ -95,7 +86,7 @@ class AdvForm extends Component {
                 />
               </label>
               <label className='advFormLabel'>
-                Цена
+                Price
                 <input
                   type='text'
                   name='price'
@@ -105,7 +96,7 @@ class AdvForm extends Component {
                 />
               </label>
               <label className='advFormLabelCheckBox'>
-                Учавствует в распродаже
+                In sale
                 <input
                   type='checkbox'
                   name='isSale'
@@ -117,7 +108,7 @@ class AdvForm extends Component {
             </div>
           </div>
           <button type='submit' className='submitButton'>
-            Добавить продукт
+            Add product
           </button>
         </form>
       </AdvFormContainer>

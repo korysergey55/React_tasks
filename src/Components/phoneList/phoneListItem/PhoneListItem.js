@@ -36,17 +36,17 @@ const PhoneListItem = ({ phone, addToCart, history, match, location }) => {
           ) : (
             <span className='withoutSalePrice'>{phone.price}</span>
           )}
-          {" грн"}
+          {" UAH"}
         </p>
         <div className='options'>
           <button
             onClick={addProduct}
             className='detailsButton'
             onClick={openDetails}>
-            Детальнее
+            Details
           </button>
           <button onClick={addProduct} className='addToCartButton'>
-            Добавить в корзину
+            Add to cart
           </button>
         </div>
       </div>

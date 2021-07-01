@@ -1,10 +1,14 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { productsRoutes } from "../routes/productsRoutes";
 import { NavLink, Route, Switch } from "react-router-dom";
 import { ProductsPageContainer } from "./ProductsPageStyled";
 import Section from "../Components/section/Section";
 
-const ProductsPage = ({ match, data }) => {
+const ProductsPage = ({ match, data, history }) => {
+  useEffect(() => {
+    history.push(match.path + "/phones");
+  }, []);
+
   return (
     <ProductsPageContainer>
       <ul className='navigationList'>
@@ -15,7 +19,8 @@ const ProductsPage = ({ match, data }) => {
                 <NavLink
                   to={match.url + route.path}
                   exact={route.exact}
-                  className='navigationListItemAnchor'>
+                  className='navigationListItemAnchor'
+                  activeClassName='navigationListItemActive'>
                   {route.name}
                 </NavLink>
               </li>

@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import  { setLoader } from '../redux/products/productsActions'
+import store from '../redux/store'
 const baseURL = "https://reactmaps-1556023014107-default-rtdb.firebaseio.com/";
 
 export const createNewAdv = async (category, newAdv) => {
@@ -50,4 +51,5 @@ export const getAllAdvByCategory = async (category) => {
   } catch (error) {
     console.log(error);
   }
+  
 };

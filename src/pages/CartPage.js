@@ -4,7 +4,7 @@ import Section from "../Components/section/Section";
 
 const CartPage = ({ data: { cart, removeFromCart, createOrder } }) => {
   return (
-    <Section title='Корзина'>
+    <Section title='Cart'>
       <CartList
         cart={cart}
         removeFromCart={removeFromCart}

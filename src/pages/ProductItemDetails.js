@@ -25,7 +25,7 @@ class ProductItemDetails extends Component {
     return (
       <ProductDetailsContainer>
         <button className='goBack' onClick={this.goBack}>
-          Назад
+          Go back
         </button>
         {laptop && (
           <div className='content'>

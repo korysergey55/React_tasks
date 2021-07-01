@@ -24,27 +24,23 @@ const CartList = ({ cart, removeFromCartByID, createOrder }) => {
             ))}
           </CartListContainer>
           <div className='totalInfo'>
-            <p className='totalInfoTitle'>Общая сумма заказа:</p>
+            <p className='totalInfoTitle'>Total price in order:</p>
             <p className='totalInfoPrice'>
-              {getTotalPrice()} <span className='totalInfoTitle'>грн</span>
+              {getTotalPrice()} <span className='totalInfoTitle'>UAH</span>
             </p>
           </div>
           <button type='button' onClick={createOrder} className='orderButton'>
-            Оформить заказ
+            Checkout
           </button>
         </>
       ) : (
-        <p>Добавьте товары в корзину</p>
+        <p>Cart is empty!</p>
       )}
     </CartListContainerWrapper>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart.items,
-  };
-};
+const mapStateToProps = (state) => ({ cart: state.cart.items });
 
 const mapDispatchToProps = { removeFromCartByID, createOrder };
 
