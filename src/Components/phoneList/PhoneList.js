@@ -3,23 +3,15 @@ import PhoneListItem from "./phoneListItem/PhoneListItem";
 import { PhoneListContainer } from "./PhoneListStyled";
 import { connect } from "react-redux";
 import { setPhones } from "../../redux/products/productsActions";
-import { getAllAdvByCategory } from "../../services/api";
+
 import { addToCart } from "../../redux/cart/cartActions";
+import { getAllAdvByCategoryOperation } from "../../redux/products/productsOperations";
 
 class PhoneList extends Component {
   componentDidMount() {
-    this.getPhones();
+    this.props.getAllAdvByCategoryOperation("phones");
   }
-  getPhones = async () => {
-    const response = await getAllAdvByCategory("phones");
-    if (response) {
-      const phones = Object.keys(response).map((key) => ({
-        id: key,
-        ...response[key],
-      }));
-      this.props.setPhones(phones);
-    }
-  };
+
   render() {
     return (
       <PhoneListContainer>
@@ -41,6 +33,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { addToCart, setPhones };
+const mapDispatchToProps = { addToCart, getAllAdvByCategoryOperation };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhoneList);

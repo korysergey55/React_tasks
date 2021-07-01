@@ -2,24 +2,14 @@ import React, { Component } from "react";
 import LaptopListItem from "./laptopListItem/LaptopListItem";
 import { LaptopListContainer } from "./LaptopListStyled";
 import { connect } from "react-redux";
-import { setLaptops } from "../../redux/products/productsActions";
+
 import { addToCart } from "../../redux/cart/cartActions";
-import { getAllAdvByCategory } from "../../services/api";
+import { getAllAdvByCategoryOperation } from "../../redux/products/productsOperations";
 
 class LaptopList extends Component {
   componentDidMount() {
-    this.getLaptops();
+    this.props.getAllAdvByCategoryOperation("laptops");
   }
-  getLaptops = async () => {
-    const response = await getAllAdvByCategory("laptops");
-    if (response) {
-      const laptops = Object.keys(response).map((key) => ({
-        id: key,
-        ...response[key],
-      }));
-      this.props.setLaptops(laptops);
-    }
-  };
 
   render() {
     return (
@@ -42,6 +32,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { addToCart, setLaptops };
+const mapDispatchToProps = { addToCart, getAllAdvByCategoryOperation };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaptopList);
